@@ -63,6 +63,7 @@ class matriz:
             self.string=None
             self.file=file
             self.style=style
+            self.filematriz=Matriz_Builder(self.file, self.style)
 
     def show(self):
         max_line=self.style[0]
@@ -84,11 +85,23 @@ def Add_Matriz(list_matriz):
     print("Matriz Adicionada!")
     return list_matriz
 
-def Sum_Matriz(list_matriz):
+def Print_Matriz(list_matriz):
     for index in range(len(list_matriz)):
         list_matriz[index].show()
         print("[",index,"]")
 
+def Ask_to_Add(list_matriz, matriz):
+    print("Adicionar matriz a lista? (y/n)")
+    choice=input()
+    if choice=="y":
+        list_matriz.append(matriz)
+        print("Matriz Adicionada!")
+    else:
+        print("Ok")
+    return list_matriz
+
+def Sum_Matriz(list_matriz):
+    Print_Matriz(list_matriz)
     print("Escolha o Número das matrizes que deseja somar, separado por espaços")
     index_sum_str=input()
     index_sum_list=List_Builder(index_sum_str)
@@ -103,21 +116,40 @@ def Sum_Matriz(list_matriz):
         matriz_sum=matriz(False,matriz_sum,matriz_1.style)
         matriz_sum.show()
         
-        print("Adicionar matriz a lista? (y/n)")
-        choice=input()
-        if choice=="y":
-            list_matriz.append(matriz_sum)
-            print("Matriz Adicionada!")
-        else:
-            print("Ok")
+        list_matriz=Ask_to_Add(list_matriz, matriz_sum)
     else:
         print("Essas matrizes não são compatíveis para soma...")
     return list_matriz
 
 
 def Multi_Matriz(list_matriz):
-    pass
+    Print_Matriz(list_matriz)
+    print("Escolha o Número das matrizes que deseja multiplicar, separado por espaços")
+    index_mul_str=input()
+    index_mul_list=List_Builder(index_mul_str)
     
+    matriz_1=list_matriz[index_mul_list[0]]
+    matriz_2=list_matriz[index_mul_list[1]]
+    matriz_mul=[]
+    
+    if matriz_1.style[1]==matriz_2.style[0]:
+        hold,line2,co2=0,0,0
+        for line in range(matriz_1.style[0]):
+            while co2<matriz_2.style[1]:
+                for co in range(matriz_1.style[1]):
+                    hold=hold+matriz_1.filematriz[line][co]*matriz_2.filematriz[line2][co2]
+                    line2=line2+1
+                matriz_mul.append(hold)
+                line2=0
+                co2=co2+1
+                hold=0
+            co2=0
+        matriz_mul=matriz(False,matriz_mul,[matriz_1.style[0],matriz_2.style[1]])
+        matriz_mul.show()
+        list_matriz=Ask_to_Add(list_matriz, matriz_mul)
+    else:
+        print("Essas matrizes não são compatíveis para multiplicação...")
+    return list_matriz
 
 def main():
     list_matriz=[]
@@ -139,11 +171,13 @@ main()
 
 
 #Determinante
-#Multiplicação de Matrizes
 #Error Detector Apurado
 '''        Resposta Vazia
 Uma virgula a menos
 Bateu a cabeça no teclado
 '''
+
+
+
 
 
