@@ -1,4 +1,4 @@
-# matriz
+# Matriz
 Primeiro Código, conjunto de usos do conhecimento matématico:Matriz
 Funcionalidades:
 
@@ -7,3 +7,5 @@ Funcionalidades:
 2)Soma de Matriz(Mostra todas as matrizes criadas, e pede 2 delas para somar. Se for possível, mostra o resultando, perguntando por último, se deseja guardar essa soma)
 
 3)Multiplicação de Matriz(Ainda não implementado)
+
+Tradução para ingles em breve :p
